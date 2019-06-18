@@ -1,0 +1,21 @@
+{
+    "name": "salesforce-login",
+    "description": "SFDCへのログイン",
+    "version": "1.0.0",
+    "author": "y.masuda",
+    "dependencies": {
+        "dotenv": "^6.2.0",
+        "puppeteer": "^1.6.0",
+        "xlsx": "^0.14.1"
+    },
+    "license": "MIT",
+    "main": "skelton.js",
+    "scripts": {
+        "main": "node skelton.js"
+    },
+    "devDependencies": {
+        "eslint": "^5.12.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.14.0"
+    }
+}
