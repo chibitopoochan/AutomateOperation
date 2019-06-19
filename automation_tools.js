@@ -74,41 +74,57 @@ async function loadExcelFile() {
 }
 
 /*
+ * Screenshot
+ */
+async function screenshot(page, target) {
+  console.log(`Screenshot : save to ${target}`);
+  await page.screenshot({ path: path.join('output', target), fullPage: true });
+}
+
+/*
  * Go to Action
  */
-async function gotoAction(page, target) {
+async function gotoAction(no, page, target) {
   console.log(`GoTo : ${target}`);
-  await page.goto(target);
+  await screenshot(page, `screenshot-${no}_before.png`);
+  await page.goto(target, { waitUntil: 'networkidle2' });
+  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
  * Type Action
  */
-async function typeAction(page, target, value) {
+async function typeAction(no, page, target, value) {
   const transID = param => (param === '$ID' ? MY_ID : param);
   const transPW = param => (param === '$PW' ? MY_PW : param);
   const typeValue = transID(transPW(value));
   console.log(`Type : ${typeValue} to ${target} `);
   await page.waitForSelector(target);
+  await screenshot(page, `screenshot-${no}_before.png`);
   await page.type(target, typeValue);
+  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
  * Click Action
  */
-async function clickAction(page, target) {
+async function clickAction(no, page, target) {
   console.log(`Click : ${target}`);
   await page.waitForSelector(target);
+  await screenshot(page, `screenshot-${no}_before.png`);
   await page.click(target);
+  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
  * Select Action
  */
-async function selectAction(page, target, value) {
+async function selectAction(no, page, target, value) {
   console.log(`Select : ${value} on ${target}`);
   await page.waitForSelector(`select[name="${target}"]`);
+  await screenshot(page, `screenshot-${no}_before.png`);
   await page.select(`select[name="${target}"]`, value);
+  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
@@ -138,19 +154,23 @@ async function selectAction(page, target, value) {
     switch (step.action) {
       case 'GoTo':
         // eslint-disable-next-line no-await-in-loop
-        await gotoAction(page, step.target);
+        await gotoAction(i, page, step.target);
         break;
       case 'Type':
         // eslint-disable-next-line no-await-in-loop
-        await typeAction(page, step.target, step.value);
+        await typeAction(i, page, step.target, step.value);
         break;
       case 'Click':
         // eslint-disable-next-line no-await-in-loop
-        await clickAction(page, step.target);
+        await clickAction(i, page, step.target);
         break;
       case 'Select':
         // eslint-disable-next-line no-await-in-loop
-        await selectAction(page, step.target, step.value);
+        await selectAction(i, page, step.target, step.value);
+        break;
+      case 'PrtScn':
+        // eslint-disable-next-line no-await-in-loop
+        await screenshot(i, page, step.target);
         break;
       // TODO create an other steps
       case 'DL':
@@ -159,4 +179,6 @@ async function selectAction(page, target, value) {
         break;
     }
   }
+
+  await browser.close();
 })();

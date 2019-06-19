@@ -1,17 +1,18 @@
 {
-    "name": "salesforce-login",
-    "description": "SFDCへのログイン",
+    "name": "automate-operation",
+    "description": "Automate Operations",
     "version": "1.0.0",
     "author": "y.masuda",
     "dependencies": {
         "dotenv": "^6.2.0",
         "puppeteer": "^1.6.0",
-        "xlsx": "^0.14.1"
+        "xlsx": "^0.14.1",
+        "jquery-balloon-js": "^1.1.2"
     },
     "license": "MIT",
-    "main": "skelton.js",
+    "main": "automation_tools.js",
     "scripts": {
-        "main": "node skelton.js"
+        "main": "node automation_tools.js"
     },
     "devDependencies": {
         "eslint": "^5.12.0",
