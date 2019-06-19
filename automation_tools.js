@@ -103,6 +103,15 @@ async function clickAction(page, target) {
 }
 
 /*
+ * Select Action
+ */
+async function selectAction(page, target, value) {
+  console.log(`Select : ${value} on ${target}`);
+  await page.waitForSelector(`select[name="${target}"]`);
+  await page.select(`select[name="${target}"]`, value);
+}
+
+/*
  * Tool boot
  */
 (async () => {
@@ -139,10 +148,13 @@ async function clickAction(page, target) {
         // eslint-disable-next-line no-await-in-loop
         await clickAction(page, step.target);
         break;
+      case 'Select':
+        // eslint-disable-next-line no-await-in-loop
+        await selectAction(page, step.target, step.value);
+        break;
       // TODO create an other steps
       case 'DL':
       case 'UL':
-      case 'Select':
       default:
         break;
     }
