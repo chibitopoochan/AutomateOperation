@@ -86,9 +86,8 @@ async function screenshot(page, target) {
  */
 async function gotoAction(no, page, target) {
   console.log(`GoTo : ${target}`);
-  await screenshot(page, `screenshot-${no}_before.png`);
+  await screenshot(page, `screenshot-${no}.png`);
   await page.goto(target, { waitUntil: 'networkidle2' });
-  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
@@ -100,9 +99,8 @@ async function typeAction(no, page, target, value) {
   const typeValue = transID(transPW(value));
   console.log(`Type : ${typeValue} to ${target} `);
   await page.waitForSelector(target);
-  await screenshot(page, `screenshot-${no}_before.png`);
+  await screenshot(page, `screenshot-${no}.png`);
   await page.type(target, typeValue);
-  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
@@ -111,9 +109,8 @@ async function typeAction(no, page, target, value) {
 async function clickAction(no, page, target) {
   console.log(`Click : ${target}`);
   await page.waitForSelector(target);
-  await screenshot(page, `screenshot-${no}_before.png`);
+  await screenshot(page, `screenshot-${no}.png`);
   await page.click(target);
-  await screenshot(page, `screenshot-${no}_after.png`);
 }
 
 /*
@@ -122,9 +119,18 @@ async function clickAction(no, page, target) {
 async function selectAction(no, page, target, value) {
   console.log(`Select : ${value} on ${target}`);
   await page.waitForSelector(`select[name="${target}"]`);
-  await screenshot(page, `screenshot-${no}_before.png`);
+  await screenshot(page, `screenshot-${no}.png`);
   await page.select(`select[name="${target}"]`, value);
-  await screenshot(page, `screenshot-${no}_after.png`);
+}
+
+/*
+ * Download Action
+ */
+async function downloadAction(no, page, target) {
+  console.log(`Download Setting : ${target}`);
+  const client = await page.target().createCDPSession();
+  await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: 'output' });
+  await clickAction(no, page, target);
 }
 
 /*
@@ -172,8 +178,10 @@ async function selectAction(no, page, target, value) {
         // eslint-disable-next-line no-await-in-loop
         await screenshot(i, page, step.target);
         break;
-      // TODO create an other steps
       case 'DL':
+        // eslint-disable-next-line no-await-in-loop
+        await downloadAction(i, page, step.target);
+        break;
       case 'UL':
       default:
         break;
