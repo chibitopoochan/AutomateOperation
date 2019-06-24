@@ -11,7 +11,7 @@ Salesforceを対象に、操作を自動化
 1. Node.jsをインストールします。
 1. 「npm install」を実行します。
 1. .envファイルを作成します。
-
+1. 「input」フォルダの「automation_sheet.xlsx」を修正します。
 
 ### 実行方法 - Run
 terminalで「node automation_tools.js」を実行します。

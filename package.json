@@ -1,23 +1,22 @@
 {
-    "name": "automate-operation",
-    "description": "Automate Operations",
-    "version": "1.0.0",
-    "author": "y.masuda",
-    "dependencies": {
-        "dotenv": "^6.2.0",
-        "puppeteer": "^1.6.0",
-        "xlsx": "^0.14.1",
-        "jquery-balloon-js": "^1.1.2"
-    },
-    "license": "MIT",
-    "main": "automation_tools.js",
-    "scripts": {
-        "main": "node automation_tools.js"
-    },
-    "devDependencies": {
-        "eslint": "^5.12.0",
-        "eslint-config-airbnb-base": "^13.1.0",
-        "eslint-plugin-import": "^2.14.0",
-        "js-yaml": ">=3.13.1"
-    }
+  "name": "automate-operation",
+  "description": "Automate Operations",
+  "version": "1.0.0",
+  "author": "y.masuda",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "puppeteer": "^1.6.0",
+    "xlsx": "^0.14.1"
+  },
+  "license": "MIT",
+  "main": "automation_tools.js",
+  "scripts": {
+    "main": "node automation_tools.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "js-yaml": ">=3.13.1"
+  }
 }
