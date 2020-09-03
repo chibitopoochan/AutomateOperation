@@ -5,7 +5,7 @@
   "author": "y.masuda",
   "dependencies": {
     "dotenv": "^6.2.0",
-    "puppeteer": "^1.6.0",
+    "puppeteer": "^1.13.0",
     "xlsx": "^0.14.1"
   },
   "license": "MIT",
